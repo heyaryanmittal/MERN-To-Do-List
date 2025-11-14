@@ -65,6 +65,15 @@ export default function TodoList() {
     }
   };
 
+  const updateTask = async (id, newTitle) => {
+    try {
+      const response = await api.tasks.update(token, id, { title: newTitle });
+      setTasks(tasks.map((task) => (task._id === id ? response.task : task)));
+    } catch (error) {
+      console.error('Failed to update task:', error);
+    }
+  };
+
   const toggleTheme = async () => {
     try {
       const newTheme = user?.theme_mode === 'light' ? 'dark' : 'light';
@@ -115,23 +124,21 @@ export default function TodoList() {
   }
 
   return (
-    <div
-      className={`min-h-screen transition-colors duration-300 ${
-        isDark ? 'bg-gray-900' : 'bg-amber-50'
-      }`}
-    >
-      <div className="max-w-4xl mx-auto p-4 md:p-8">
-        <div className="flex justify-between items-center mb-6">
+    <div className="w-full transition-colors duration-300">
+      <div className="w-full">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6">
           <h1
-            className={`text-3xl md:text-4xl font-bold ${
-              isDark ? 'text-amber-200' : 'text-amber-900'
+            className={`text-2xl sm:text-3xl md:text-4xl font-bold text-center sm:text-left ${
+              isDark ? 'text-amber-800' : 'text-amber-800'
             }`}
-            style={{ fontFamily: "'Courier New', monospace" }}
+            style={{ 
+              fontFamily: "'Courier New', monospace"
+            }}
           >
             My To Do List
           </h1>
 
-          <div className="flex gap-2">
+          <div className="flex justify-center sm:justify-end gap-2 flex-wrap">
             <button
               onClick={downloadPDF}
               className={`p-2 rounded-lg transition-all ${
@@ -173,13 +180,13 @@ export default function TodoList() {
         <div
           className={`${
             isDark ? 'bg-gray-800' : 'bg-white'
-          } rounded-lg shadow-2xl p-6 md:p-8 border-4 ${
-            isDark ? 'border-gray-700' : 'border-amber-300'
+          } rounded-xl shadow-lg p-4 sm:p-6 border-2 ${
+            isDark ? 'border-gray-700' : 'border-amber-200'
           }`}
           style={{
             backgroundImage: isDark
               ? 'none'
-              : 'repeating-linear-gradient(transparent, transparent 31px, #e5e5e5 31px, #e5e5e5 32px)',
+              : 'repeating-linear-gradient(transparent, transparent 31px, #f3f4f6 31px, #f3f4f6 32px)',
           }}
         >
           <TaskInput onAdd={addTask} isDark={isDark} />
@@ -201,6 +208,7 @@ export default function TodoList() {
                   onDelete={deleteTask}
                   onTogglePriority={togglePriority}
                   onToggleComplete={toggleComplete}
+                  onUpdate={updateTask}
                   isDark={isDark}
                 />
               ))
@@ -208,15 +216,21 @@ export default function TodoList() {
           </div>
         </div>
 
-        <p
-          className={`text-center mt-6 text-sm ${
-            isDark ? 'text-gray-400' : 'text-gray-600'
-          }`}
-        >
-          {tasks.length} {tasks.length === 1 ? 'task' : 'tasks'} •{' '}
-          {tasks.filter((t) => t.is_completed).length} completed •{' '}
-          {tasks.filter((t) => t.is_priority).length} priority
-        </p>
+        <div className="mt-4 sm:mt-6 text-center">
+          <p className={`text-xs sm:text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+            <span className="inline-block mx-1">
+              {tasks.length} {tasks.length === 1 ? 'task' : 'tasks'}
+            </span>
+            <span className="mx-1">•</span>
+            <span className="inline-block mx-1">
+              {tasks.filter((t) => t.is_completed).length} completed
+            </span>
+            <span className="mx-1">•</span>
+            <span className="inline-block mx-1">
+              {tasks.filter((t) => t.is_priority).length} priority
+            </span>
+          </p>
+        </div>
       </div>
     </div>
   );

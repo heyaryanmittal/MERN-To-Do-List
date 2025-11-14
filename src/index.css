@@ -2,26 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Ensure text is white in dark mode */
-.dark {
-  color: white;
+/* Base styles */
+:root {
+  --color-bg: #fffbeb; /* amber-50 */
+  --color-text: #1e293b; /* slate-800 */
 }
 
-/* Override specific text colors that might be set by other classes */
+/* Dark theme */
+.dark {
+  --color-bg: #0f172a; /* gray-900 */
+  --color-text: #f8fafc; /* slate-50 */
+}
+
+/* Apply to entire viewport */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Full viewport background */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Form elements */
+input,
+textarea,
+textarea:focus,
+select:focus {
+  background-color: transparent;
+  color: var(--color-text);
+  outline: none;
+}
+
+/* Text colors for dark mode */
+.dark .text-amber-900 {
+  color: #fef3c7; /* amber-100 */
+}
+
+/* Ensure proper contrast */
 .dark .text-gray-700,
 .dark .text-gray-800,
 .dark .text-gray-900 {
-  color: rgb(243 244 246); /* text-gray-100 */
-}
-
-/* Ensure form inputs have white text in dark mode */
-.dark input,
-.dark textarea,
-.dark select {
-  color: white;
-}
-
-/* Override any other specific text colors that might be set */
-.dark .text-inherit {
-  color: white !important;
+  color: #e2e8f0; /* slate-200 */
 }

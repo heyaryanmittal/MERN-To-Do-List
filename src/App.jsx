@@ -28,7 +28,21 @@ function AppContent() {
     );
   }
 
-  return user ? <TodoList /> : <LandingPage />;
+  const theme = user?.theme_mode;
+
+  return (
+    <div className={`min-h-screen flex items-center justify-start sm:justify-center p-4 sm:p-6 ${theme === 'dark' ? 'bg-gray-900' : 'bg-amber-50'}`}>
+      <div className="w-full max-w-4xl mx-auto">
+        {user ? (
+          <AuthProvider>
+            <TodoList />
+          </AuthProvider>
+        ) : (
+          <LandingPage />
+        )}
+      </div>
+    </div>
+  );
 }
 
 function App() {
