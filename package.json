@@ -1,10 +1,11 @@
 {
-  "name": "To-Do-List",
+  "name": "to-do-list",
   "private": true,
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "start": "vite",
+    "dev": "node --experimental-modules --es-module-specifier-resolution=node server/server.js",
     "server": "node --experimental-modules --es-module-specifier-resolution=node server/server.js",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
