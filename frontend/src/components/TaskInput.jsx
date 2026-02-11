@@ -27,7 +27,7 @@ export default function TaskInput({ onAdd, isDark }) {
   const [title, setTitle] = useState('');
   const [showFormatting, setShowFormatting] = useState(false);
   const [fontStyle, setFontStyle] = useState('Inter');
-  // Initialize with black color by default, will be updated when isDark changes
+
   const [fontColor, setFontColor] = useState('#000000');
   const [customColor, setCustomColor] = useState('#000000');
   const [isBold, setIsBold] = useState(false);
@@ -35,7 +35,7 @@ export default function TaskInput({ onAdd, isDark }) {
   const [isUnderline, setIsUnderline] = useState(false);
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
 
-  // Update font color when theme changes
+
   useEffect(() => {
     setFontColor(isDark ? '#ffffff' : '#000000');
     setCustomColor(isDark ? '#ffffff' : '#000000');
@@ -43,22 +43,24 @@ export default function TaskInput({ onAdd, isDark }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // Get current date at midnight for comparison
+
+
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const selectedDate = new Date(date);
-    
-    // Check if selected date is in the past
+
+
     if (selectedDate < today) {
       alert('Please select today\'s date or a future date');
       return;
     }
-    
+
     if (title.trim()) {
+      const isDefaultColor = fontColor === '#000000' || fontColor === '#ffffff';
+
       onAdd(title, {
         font_style: fontStyle,
-        font_color: fontColor,
+        font_color: isDefaultColor ? null : fontColor,
         is_bold: isBold,
         is_italic: isItalic,
         is_underline: isUnderline,
@@ -78,9 +80,8 @@ export default function TaskInput({ onAdd, isDark }) {
 
   return (
     <div
-      className={`rounded-xl p-4 border-2 ${
-        isDark ? 'border-gray-700' : 'border-amber-100'
-      } w-full shadow-md`}
+      className={`rounded-xl p-4 border-2 ${isDark ? 'border-gray-700' : 'border-amber-100'
+        } w-full shadow-md`}
     >
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-3">
@@ -91,11 +92,10 @@ export default function TaskInput({ onAdd, isDark }) {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Add a new task..."
-                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 ${
-                  isDark 
-                    ? 'border-gray-600 bg-gray-700 text-gray-100 placeholder-gray-400' 
-                    : 'border-gray-300 bg-white text-gray-900 placeholder-gray-500'
-                }`}
+                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 ${isDark
+                  ? 'border-gray-600 bg-gray-700 text-gray-100 placeholder-gray-400'
+                  : 'border-gray-300 bg-white text-gray-900 placeholder-gray-500'
+                  }`}
                 style={{
                   fontFamily: fontStyle,
                   color: fontColor,
@@ -107,11 +107,10 @@ export default function TaskInput({ onAdd, isDark }) {
               <button
                 type="button"
                 onClick={() => setShowFormatting(!showFormatting)}
-                className={`absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-md transition-colors ${
-                  isDark
-                    ? 'bg-gray-700 hover:bg-gray-600 text-white'
-                    : 'bg-amber-100 hover:bg-amber-200 text-amber-800'
-                }`}
+                className={`absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-md transition-colors ${isDark
+                  ? 'bg-gray-700 hover:bg-gray-600 text-white'
+                  : 'bg-amber-100 hover:bg-amber-200 text-amber-800'
+                  }`}
                 title="Formatting options"
               >
                 <Type className="w-4 h-4" />
@@ -124,11 +123,10 @@ export default function TaskInput({ onAdd, isDark }) {
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 min={new Date().toISOString().split('T')[0]}
-                className={`px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 ${
-                  isDark 
-                    ? 'border-gray-600 bg-gray-700 text-gray-100' 
-                    : 'border-gray-300 bg-white text-gray-900'
-                }`}
+                className={`px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 ${isDark
+                  ? 'border-gray-600 bg-gray-700 text-gray-100'
+                  : 'border-gray-300 bg-white text-gray-900'
+                  }`}
               />
               <button
                 type="submit"
@@ -146,11 +144,10 @@ export default function TaskInput({ onAdd, isDark }) {
               <button
                 type="button"
                 onClick={() => setIsBold(!isBold)}
-                className={`p-2 rounded-md transition-colors ${
-                  isBold
-                    ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400'
-                    : 'text-gray-600 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-600'
-                }`}
+                className={`p-2 rounded-md transition-colors ${isBold
+                  ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400'
+                  : 'text-gray-600 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-600'
+                  }`}
                 title="Bold"
               >
                 <Bold className="w-4 h-4" />
@@ -159,11 +156,10 @@ export default function TaskInput({ onAdd, isDark }) {
               <button
                 type="button"
                 onClick={() => setIsItalic(!isItalic)}
-                className={`p-2 rounded-md transition-colors ${
-                  isItalic
-                    ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400'
-                    : 'text-gray-600 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-600'
-                }`}
+                className={`p-2 rounded-md transition-colors ${isItalic
+                  ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400'
+                  : 'text-gray-600 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-600'
+                  }`}
                 title="Italic"
               >
                 <Italic className="w-4 h-4" />
@@ -172,11 +168,10 @@ export default function TaskInput({ onAdd, isDark }) {
               <button
                 type="button"
                 onClick={() => setIsUnderline(!isUnderline)}
-                className={`p-2 rounded-md transition-colors ${
-                  isUnderline
-                    ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400'
-                    : 'text-gray-600 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-600'
-                }`}
+                className={`p-2 rounded-md transition-colors ${isUnderline
+                  ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400'
+                  : 'text-gray-600 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-600'
+                  }`}
                 title="Underline"
               >
                 <Underline className="w-4 h-4" />
@@ -204,11 +199,10 @@ export default function TaskInput({ onAdd, isDark }) {
                   <button
                     key={color}
                     type="button"
-                    className={`w-5 h-5 rounded-full border-2 transition-all ${
-                      fontColor === color
-                        ? 'ring-2 ring-offset-1 ring-amber-500 border-white dark:border-gray-800'
-                        : 'border-transparent hover:border-gray-300 dark:hover:border-gray-500'
-                    }`}
+                    className={`w-5 h-5 rounded-full border-2 transition-all ${fontColor === color
+                      ? 'ring-2 ring-offset-1 ring-amber-500 border-white dark:border-gray-800'
+                      : 'border-transparent hover:border-gray-300 dark:hover:border-gray-500'
+                      }`}
                     style={{ backgroundColor: color }}
                     onClick={() => setFontColor(color)}
                     title={color}
@@ -216,7 +210,7 @@ export default function TaskInput({ onAdd, isDark }) {
                 ))}
                 <div className="flex items-center gap-2 ml-1">
                   <div className="relative">
-                    <div 
+                    <div
                       className="w-6 h-6 rounded-full border-2 border-gray-300 dark:border-gray-600 overflow-hidden"
                       style={{ backgroundColor: customColor }}
                     >

@@ -2,26 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Base styles */
+
 :root {
-  --color-bg: #fffbeb; /* amber-50 */
-  --color-text: #1e293b; /* slate-800 */
+  --color-bg: #fffbeb;
+  --color-text: #1e293b;
 }
 
-/* Dark theme */
+
 .dark {
-  --color-bg: #0f172a; /* gray-900 */
-  --color-text: #f8fafc; /* slate-50 */
+  --color-bg: #0f172a;
+  --color-text: #f8fafc;
 }
 
-/* Apply to entire viewport */
+
 html, body, #root {
   height: 100%;
   margin: 0;
   padding: 0;
 }
 
-/* Full viewport background */
+
 body {
   background-color: var(--color-bg);
   color: var(--color-text);
@@ -29,7 +29,7 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Form elements */
+
 input,
 textarea,
 textarea:focus,
@@ -39,14 +39,14 @@ select:focus {
   outline: none;
 }
 
-/* Text colors for dark mode */
+
 .dark .text-amber-900 {
-  color: #fef3c7; /* amber-100 */
+  color: #fef3c7;
 }
 
-/* Ensure proper contrast */
+
 .dark .text-gray-700,
 .dark .text-gray-800,
 .dark .text-gray-900 {
-  color: #e2e8f0; /* slate-200 */
+  color: #e2e8f0;
 }

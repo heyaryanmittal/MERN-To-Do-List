@@ -6,15 +6,15 @@ import TodoList from './components/TodoList';
 function AppContent() {
   const { user, loading } = useAuth();
 
-  // Apply theme class to the root element
+
   useEffect(() => {
     const root = window.document.documentElement;
-    
+
     if (user) {
       root.classList.remove('light', 'dark');
       root.classList.add(user.theme_mode);
     } else {
-      // Default to light theme if not logged in
+
       root.classList.remove('light', 'dark');
       root.classList.add('light');
     }
@@ -31,12 +31,10 @@ function AppContent() {
   const theme = user?.theme_mode;
 
   return (
-    <div className={`min-h-screen flex items-center justify-start sm:justify-center p-4 sm:p-6 ${theme === 'dark' ? 'bg-gray-900' : 'bg-amber-50'}`}>
+    <div className={`min-h-screen flex items-start sm:items-center justify-center pt-8 sm:pt-0 p-4 sm:p-6 ${theme === 'dark' ? 'bg-gray-900' : 'bg-amber-50'}`}>
       <div className="w-full max-w-4xl mx-auto">
         {user ? (
-          <AuthProvider>
-            <TodoList />
-          </AuthProvider>
+          <TodoList />
         ) : (
           <LandingPage />
         )}

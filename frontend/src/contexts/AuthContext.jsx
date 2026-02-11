@@ -57,7 +57,7 @@ export function AuthProvider({ children }) {
     localStorage.removeItem('token');
     setToken(null);
     setUser(null);
-    // Force a full page reload to reset the application state
+
     window.location.href = '/';
   };
 

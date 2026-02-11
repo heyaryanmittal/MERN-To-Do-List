@@ -33,10 +33,11 @@ export default function TaskItem({
       textDecoration = 'line-through';
     }
 
-    // Always use theme-appropriate colors for better visibility
-    const defaultTextColor = isDark ? '#e5e7eb' : '#111827'; // Light gray for dark mode, almost black for light
-    const textColor = task.font_color && task.font_color !== '#ffffff' ? task.font_color : defaultTextColor;
-    
+
+    const defaultTextColor = isDark ? '#e5e7eb' : '#111827';
+    const isExplicitDefault = task.font_color === '#000000' || task.font_color === '#ffffff';
+    const textColor = (task.font_color && !isExplicitDefault) ? task.font_color : defaultTextColor;
+
     return {
       fontFamily: task.font_style || 'Inter',
       color: textColor,
@@ -57,11 +58,10 @@ export default function TaskItem({
 
   return (
     <div
-      className={`flex items-start gap-3 p-3 sm:p-4 rounded-lg transition-all group ${
-        isDark
-          ? 'hover:bg-gray-700/50 bg-gray-800/50'
-          : 'hover:bg-amber-50 bg-white/50'
-      } border border-transparent hover:border-amber-200/30`}
+      className={`flex items-start gap-3 p-3 sm:p-4 rounded-lg transition-all group ${isDark
+        ? 'hover:bg-gray-700/50 bg-gray-800/50'
+        : 'hover:bg-amber-50 bg-white/50'
+        } border border-transparent hover:border-amber-200/30`}
     >
       <input
         type="checkbox"
@@ -82,8 +82,8 @@ export default function TaskItem({
                 ...getTextStyle(),
                 textShadow: 'none',
                 backgroundColor: isDark ? 'rgba(255,255,255,0.1)' : 'white',
-                color: isDark ? '#ffffff' : '#1f2937', // Using gray-800 for better contrast
-                borderColor: isDark ? '#4b5563' : '#d1d5db', // gray-600 in dark, gray-300 in light
+                color: isDark ? '#ffffff' : '#1f2937',
+                borderColor: isDark ? '#4b5563' : '#d1d5db',
               }}
               autoFocus
             />
@@ -108,9 +108,8 @@ export default function TaskItem({
           </p>
         )}
         <p
-          className={`text-xs mt-1 ${
-            isDark ? 'text-gray-300' : 'text-gray-600'
-          }`}
+          className={`text-xs mt-1 ${isDark ? 'text-gray-300' : 'text-gray-600'
+            }`}
         >
           {formatDate(task.date)}
         </p>
@@ -122,24 +121,22 @@ export default function TaskItem({
             setEditedTitle(task.title);
             setIsEditing(true);
           }}
-          className={`p-1.5 rounded-md transition-colors ${
-            isDark
-              ? 'text-gray-400 hover:text-blue-400 hover:bg-gray-700/50'
-              : 'text-gray-500 hover:text-blue-600 hover:bg-gray-100'
-          }`}
+          className={`p-1.5 rounded-md transition-colors ${isDark
+            ? 'text-gray-400 hover:text-blue-400 hover:bg-gray-700/50'
+            : 'text-gray-500 hover:text-blue-600 hover:bg-gray-100'
+            }`}
           title="Edit task"
         >
           <Edit className="w-4 h-4" />
         </button>
         <button
           onClick={() => onTogglePriority(task._id, task.is_priority)}
-          className={`p-1.5 rounded-lg transition-colors ${
-            task.is_priority
-              ? 'text-yellow-500 bg-yellow-500/10 hover:bg-yellow-500/20'
-              : isDark
+          className={`p-1.5 rounded-lg transition-colors ${task.is_priority
+            ? 'text-yellow-500 bg-yellow-500/10 hover:bg-yellow-500/20'
+            : isDark
               ? 'text-gray-400 hover:text-yellow-400 hover:bg-gray-700/50'
               : 'text-gray-400 hover:text-yellow-600 hover:bg-amber-50'
-          }`}
+            }`}
           title={task.is_priority ? 'Remove priority' : 'Mark as priority'}
         >
           <Star
@@ -150,11 +147,10 @@ export default function TaskItem({
 
         <button
           onClick={() => onDelete(task._id)}
-          className={`p-1.5 rounded-lg transition-colors ${
-            isDark
-              ? 'text-gray-400 hover:text-red-400 hover:bg-gray-700/50'
-              : 'text-gray-400 hover:text-red-600 hover:bg-amber-50'
-          }`}
+          className={`p-1.5 rounded-lg transition-colors ${isDark
+            ? 'text-gray-400 hover:text-red-400 hover:bg-gray-700/50'
+            : 'text-gray-400 hover:text-red-600 hover:bg-amber-50'
+            }`}
           title="Delete task"
         >
           <Trash2 className="w-4 h-4 sm:w-5 sm:h-5" />
