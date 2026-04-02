@@ -5,6 +5,7 @@ dotenv.config();
 // Core imports
 import express from "express";
 import cors from "cors";
+import compression from "compression";
 import colors from "colors";
 import dns from "dns";
 import path from "path";
@@ -30,6 +31,7 @@ await connectDB();
 
 // Middlewares
 app.use(cors());
+app.use(compression());
 app.use(express.json());
 
 // API Routes
