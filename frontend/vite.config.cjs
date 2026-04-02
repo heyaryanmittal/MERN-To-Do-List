@@ -9,8 +9,9 @@ module.exports = defineConfig({
   },
   server: {
     proxy: {
-      '/api': {
-        target: process.env.VITE_API_URL || 'http://localhost:5000',
+      '/_/backend': {
+        target: 'http://localhost:5000',
+        rewrite: (path) => path.replace(/^\/_\/backend/, ''),
         changeOrigin: true,
       },
     },

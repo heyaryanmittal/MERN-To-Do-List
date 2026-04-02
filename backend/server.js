@@ -34,6 +34,14 @@ app.use(cors());
 app.use(compression());
 app.use(express.json());
 
+// Global Prefix Fix for Vercel experimentalServices
+app.use((req, res, next) => {
+  if (req.url.startsWith('/_/backend')) {
+    req.url = req.url.replace('/_/backend', '');
+  }
+  next();
+});
+
 // API Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/tasks", taskRoutes);
