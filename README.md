@@ -1,75 +1,71 @@
-# MERN To-Do List
+# MERN To-Do List (Mobile Responsive)
 
-A full-stack MERN (MongoDB, Express, React, Node.js) To-Do List application with features like authentication, task prioritization, dark/light mode, and PDF export.
+A comprehensive full-stack MERN (MongoDB, Express, React, Node.js) To-Do List application. This project features a modern, mobile-responsive UI, user authentication, task prioritization, theme persistence, and PDF export capabilities.
 
-## Project Structure
+## 📁 Project Structure
 
-This project is organized as a monorepo with separate directories for frontend and backend:
+This project follows a standard monorepo architecture for easy management and deployment:
 
-- **frontend/**: React + Vite application
-- **backend/**: Node.js + Express API server
+- **`/` (Root)**: Contains universal configurations (`vercel.json`, `.gitignore`) and orchestration scripts.
+- **`backend/`**: Node.js + Express API server with MongoDB integration.
+- **`frontend/`**: React + Vite application with Tailwind CSS for styling.
+- **`dist/`**: Universal build output directory (at root) for production deployment.
 
-## Prerequisites
+## 🚀 Getting Started
 
-- Node.js (v18+ recommended)
-- MongoDB Database (Cloud Atlas or local)
+### Prerequisites
+- Node.js (v18+)
+- MongoDB (Atlas or Local instance)
 
-## Setup & Installation
+### 1. Installation
 
-1.  **Clone the repository**
-2.  **Install dependencies** for both frontend and backend specific folders:
-    ```bash
-    # From the root directory
-    npm run install-all
-    ```
-    Or manually:
-    ```bash
-    cd frontend && npm install
-    cd ../backend && npm install
-    ```
+From the root directory, install all dependencies for both the root, frontend, and backend modules:
+```bash
+npm run install:all
+```
 
-3.  **Environment Configuration**
-    Create a `.env` file in the **root** directory with the following variables:
+### 2. Environment Configuration
 
-    ```env
-    # Backend Configuration
-    PORT=5000
-    MONGODB_URI=your_mongodb_connection_string
-    JWT_SECRET=your_jwt_secret_key
-    JWT_EXPIRE=7d
+Create the following files in their respective directories:
 
-    # Frontend Configuration
-    VITE_API_URL=http://localhost:5000/api
-    ```
+**`backend/.env`**
+```env
+PORT=5000
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+JWT_EXPIRE=30d
+```
 
-## Running Locally
+**`frontend/.env`**
+```env
+VITE_API_URL=/api
+```
 
-1.  **Start the Full Project (Frontend + Backend)**
-    ```bash
-    # From the root directory
-    npm run dev
-    ```
-    The frontend will start on `http://localhost:5173` (or the next available port), and the backend will start on `http://localhost:5000`.
+### 3. Running Locally
 
-2.  **(Optional) Run Frontend/Backend Separately**
-    If you prefer running them in separate terminals, you can start them individually.
+You can run the entire stack or individual components from the root directory:
 
-## Deployment
+- **Full Stack (Concurrent)**: `npm run dev`
+- **Backend Only**: `npm run backend`
+- **Frontend Only**: `npm run frontend`
 
-### Backend (e.g., Render, Railway, Heroku)
-1.  Deploy the contents of the `backend/` folder.
-2.  Set the environment variables (`MONGODB_URI`, `JWT_SECRET`, etc.) in the dashboard.
+## 🛠️ Key Features
 
-### Frontend (e.g., Vercel, Netlify)
-1.  Deploy the contents of the `frontend/` folder.
-2.  Set the build command to `npm run build` and output directory to `dist`.
-3.  Set the `VITE_API_URL` environment variable to your deployed backend URL.
+- **📱 Fully Mobile Responsive**: Re-engineered UI that scales perfectly from mobile screens to ultra-wide desktops.
+- **🔐 Secure Authentication**: JWT-based user login and signup with protected task routes.
+- **✨ Rich Task Formatting**: Support for Bold, Italic, Underline, and custom font colors.
+- **🌓 Adaptive Theming**: Persistent Dark and Light modes tailored to user preferences.
+- **📄 PDF Integration**: Cleanly formatted export of your entire to-do list.
+- **📅 Smart Task Input**: Future-dated task entry to stay ahead of your schedule.
 
-## Features
+## 🌐 Deployment (Vercel)
 
-- **User Authentication**: Secure signup and login functionality.
-- **Task Management**: Create, read, update, delete (CRUD) tasks.
-- **Prioritization**: Mark tasks as high priority.
-- **Theming**: Toggle between Light and Dark modes (persisted per user).
-- **Rich Text**: Basic formatting options (Bold, Italic, Underline, Color).
-- **PDF Export**: Download your to-do list as a PDF file.
+This project is pre-configured for Vercel deployment. Both the frontend and backend are mapped through the root `vercel.json`:
+
+1. Connect your repository to Vercel.
+2. Ensure the root directory is selected as the project root.
+3. Add your **Backend environment variables** in the Vercel dashboard.
+4. Deploy! Vercel will handle the static build and API routes automatically.
+
+---
+*Created with focus on clean code and professional UI aesthetics.*

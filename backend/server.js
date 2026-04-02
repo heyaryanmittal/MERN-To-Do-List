@@ -63,4 +63,9 @@ const startServer = (port, attemptsLeft = 10) => {
   });
 };
 
-startServer(START_PORT);
+// Start server with port fallback only when NOT on Vercel
+if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
+  startServer(START_PORT);
+}
+
+export default app;

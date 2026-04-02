@@ -15,4 +15,8 @@ module.exports = defineConfig({
       },
     },
   },
+  build: {
+    outDir: '../dist',
+    emptyOutDir: true,
+  },
 });
