@@ -31,7 +31,7 @@ function AppContent() {
   const theme = user?.theme_mode;
 
   return (
-    <div className={`min-h-screen flex items-start sm:items-center justify-center pt-8 sm:pt-0 p-4 sm:p-6 ${theme === 'dark' ? 'bg-gray-900' : 'bg-amber-50'}`}>
+    <div className={`min-h-screen flex items-start sm:items-center justify-center pt-8 sm:pt-0 px-3 sm:px-6 py-6 sm:py-6 ${theme === 'dark' ? 'bg-gray-900' : 'bg-amber-50'}`}>
       <div className="w-full max-w-4xl mx-auto">
         {user ? (
           <TodoList />

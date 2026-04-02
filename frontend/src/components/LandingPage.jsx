@@ -33,15 +33,15 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-amber-600 rounded-2xl shadow-lg mb-4 transform rotate-3">
-            <BookOpen className="w-10 h-10 text-white" />
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-amber-600 rounded-2xl shadow-lg mb-4 transform rotate-3">
+            <BookOpen className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
           </div>
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">My To Do List</h1>
-          <p className="text-gray-600">Manage your tasks effortlessly</p>
+          <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-2">My To Do List</h1>
+          <p className="text-sm sm:text-base text-gray-600 px-4">Manage your tasks effortlessly</p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-8 border-2 border-amber-200">
+        <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 border-2 border-amber-200 mx-auto w-full">
           <div className="flex gap-2 mb-6">
             <button
               onClick={() => setIsLogin(true)}

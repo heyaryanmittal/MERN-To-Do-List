@@ -126,9 +126,9 @@ export default function TodoList() {
   return (
     <div className="w-full transition-colors duration-300">
       <div className="w-full">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
           <h1
-            className={`text-2xl sm:text-3xl md:text-4xl font-bold text-center sm:text-left ${
+            className={`text-2xl sm:text-3xl md:text-4xl font-bold text-center sm:text-left w-full sm:w-auto ${
               isDark ? 'text-amber-800' : 'text-amber-800'
             }`}
             style={{ 
@@ -138,7 +138,7 @@ export default function TodoList() {
             My To Do List
           </h1>
 
-          <div className="flex justify-center sm:justify-end gap-2 flex-wrap">
+          <div className="flex justify-center sm:justify-end gap-2 flex-wrap w-full sm:w-auto">
             <button
               onClick={downloadPDF}
               className={`p-2 rounded-lg transition-all ${
@@ -216,20 +216,20 @@ export default function TodoList() {
           </div>
         </div>
 
-        <div className="mt-4 sm:mt-6 text-center">
-          <p className={`text-xs sm:text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            <span className="inline-block mx-1">
+        <div className="mt-4 sm:mt-6">
+          <div className={`flex flex-wrap justify-center items-center gap-x-2 gap-y-1 text-xs sm:text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+            <span>
               {tasks.length} {tasks.length === 1 ? 'task' : 'tasks'}
             </span>
-            <span className="mx-1">•</span>
-            <span className="inline-block mx-1">
+            <span className="opacity-40">•</span>
+            <span>
               {tasks.filter((t) => t.is_completed).length} completed
             </span>
-            <span className="mx-1">•</span>
-            <span className="inline-block mx-1">
+            <span className="opacity-40">•</span>
+            <span>
               {tasks.filter((t) => t.is_priority).length} priority
             </span>
-          </p>
+          </div>
         </div>
       </div>
     </div>

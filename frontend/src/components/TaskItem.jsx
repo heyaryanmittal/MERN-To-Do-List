@@ -70,14 +70,14 @@ export default function TaskItem({
         className="mt-1 w-4 h-4 sm:w-5 sm:h-5 rounded border-2 cursor-pointer accent-amber-600 flex-shrink-0"
       />
 
-      <div className="flex-1 min-w-0">
+      <div className="flex-1 min-w-0 pr-1">
         {isEditing ? (
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 w-full">
             <input
               type="text"
               value={editedTitle}
               onChange={(e) => setEditedTitle(e.target.value)}
-              className="flex-1 px-2 py-1 border rounded"
+              className="flex-1 min-w-0 px-2 py-1 border rounded text-sm sm:text-base"
               style={{
                 ...getTextStyle(),
                 textShadow: 'none',
@@ -87,28 +87,30 @@ export default function TaskItem({
               }}
               autoFocus
             />
-            <button
-              onClick={handleSave}
-              className="p-1 text-green-500 hover:bg-gray-200 dark:hover:bg-gray-600 rounded"
-              title="Save"
-            >
-              <Check className="w-4 h-4" />
-            </button>
-            <button
-              onClick={handleCancel}
-              className="p-1 text-red-500 hover:bg-gray-200 dark:hover:bg-gray-600 rounded"
-              title="Cancel"
-            >
-              <X className="w-4 h-4" />
-            </button>
+            <div className="flex gap-1 flex-shrink-0">
+              <button
+                onClick={handleSave}
+                className="p-1.5 text-green-500 hover:bg-gray-200 dark:hover:bg-gray-600 rounded bg-green-50 dark:bg-green-900/20"
+                title="Save"
+              >
+                <Check className="w-4 h-4" />
+              </button>
+              <button
+                onClick={handleCancel}
+                className="p-1.5 text-red-500 hover:bg-gray-200 dark:hover:bg-gray-600 rounded bg-red-50 dark:bg-red-900/20"
+                title="Cancel"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         ) : (
-          <p className="text-base sm:text-lg break-words leading-relaxed" style={getTextStyle()}>
+          <p className="text-base sm:text-lg break-words leading-tight sm:leading-relaxed" style={getTextStyle()}>
             {task.title}
           </p>
         )}
         <p
-          className={`text-xs mt-1 ${isDark ? 'text-gray-300' : 'text-gray-600'
+          className={`text-[10px] sm:text-xs mt-1 font-medium tracking-wide uppercase ${isDark ? 'text-gray-400' : 'text-gray-500'
             }`}
         >
           {formatDate(task.date)}

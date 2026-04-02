@@ -86,13 +86,13 @@ export default function TaskInput({ onAdd, isDark }) {
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-3">
           <div className="flex flex-col sm:flex-row gap-2 w-full">
-            <div className="relative flex-1">
+            <div className="relative flex-1 min-w-0">
               <input
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Add a new task..."
-                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 ${isDark
+                className={`w-full pl-4 pr-10 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 ${isDark
                   ? 'border-gray-600 bg-gray-700 text-gray-100 placeholder-gray-400'
                   : 'border-gray-300 bg-white text-gray-900 placeholder-gray-500'
                   }`}
@@ -117,20 +117,20 @@ export default function TaskInput({ onAdd, isDark }) {
               </button>
             </div>
 
-            <div className="flex gap-2">
+            <div className="flex gap-2 w-full sm:w-auto">
               <input
                 type="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 min={new Date().toISOString().split('T')[0]}
-                className={`px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 ${isDark
+                className={`flex-1 sm:flex-none px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 min-w-0 ${isDark
                   ? 'border-gray-600 bg-gray-700 text-gray-100'
                   : 'border-gray-300 bg-white text-gray-900'
                   }`}
               />
               <button
                 type="submit"
-                className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors flex items-center gap-2"
+                className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors flex items-center justify-center gap-2 flex-shrink-0"
               >
                 <Plus className="w-4 h-4" />
                 <span className="hidden sm:inline">Add</span>
@@ -139,7 +139,7 @@ export default function TaskInput({ onAdd, isDark }) {
           </div>
 
           {showFormatting && (
-            <div className="flex flex-wrap items-center gap-2 p-2 bg-gray-50 dark:bg-gray-700 rounded-lg">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 p-2 bg-gray-50 dark:bg-gray-700 rounded-lg">
 
               <button
                 type="button"
