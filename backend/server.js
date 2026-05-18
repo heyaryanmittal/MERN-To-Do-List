@@ -74,7 +74,7 @@ const startServer = (port, attemptsLeft = 10) => {
 };
 
 // Start server with port fallback only when NOT on Vercel
-if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
+if (!process.env.VERCEL) {
   startServer(START_PORT);
 }
 

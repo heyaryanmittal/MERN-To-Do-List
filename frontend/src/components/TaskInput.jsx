@@ -23,6 +23,14 @@ const PRESET_COLORS = [
   '#ec4899',
 ];
 
+const getLocalDateString = () => {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
 export default function TaskInput({ onAdd, isDark }) {
   const [title, setTitle] = useState('');
   const [showFormatting, setShowFormatting] = useState(false);
@@ -33,7 +41,7 @@ export default function TaskInput({ onAdd, isDark }) {
   const [isBold, setIsBold] = useState(false);
   const [isItalic, setIsItalic] = useState(false);
   const [isUnderline, setIsUnderline] = useState(false);
-  const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
+  const [date, setDate] = useState(getLocalDateString());
 
 
   useEffect(() => {
@@ -45,12 +53,10 @@ export default function TaskInput({ onAdd, isDark }) {
     e.preventDefault();
 
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const selectedDate = new Date(date);
+    const todayStr = getLocalDateString();
 
 
-    if (selectedDate < today) {
+    if (date < todayStr) {
       alert('Please select today\'s date or a future date');
       return;
     }
@@ -73,7 +79,7 @@ export default function TaskInput({ onAdd, isDark }) {
       setIsBold(false);
       setIsItalic(false);
       setIsUnderline(false);
-      setDate(new Date().toISOString().split('T')[0]);
+      setDate(getLocalDateString());
       setShowFormatting(false);
     }
   };
@@ -122,7 +128,7 @@ export default function TaskInput({ onAdd, isDark }) {
                 type="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-                min={new Date().toISOString().split('T')[0]}
+                min={getLocalDateString()}
                 className={`flex-1 sm:flex-none px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 min-w-0 ${isDark
                   ? 'border-gray-600 bg-gray-700 text-gray-100'
                   : 'border-gray-300 bg-white text-gray-900'
